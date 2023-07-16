@@ -1,0 +1,59 @@
+﻿@model BeanScene.ViewModels.SittingViewModel
+
+@{
+    ViewData["Title"] = "Create Sitting";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    // Create select lists for start & end times
+    SelectList timeslotList = new SelectList(Model.Timeslots, "Time", "TimeFormatted");
+}
+
+<section class="container category-create py-5">
+    <div class="row pt-5">
+        <div class="col-md-8 mx-auto">
+            <h4 class="view-title">@ViewData["Title"]</h4>
+            <hr />
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.Date" class="control-label p-1"></label>
+                    <input asp-for="Sitting.Date" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" id="dateInput" />
+                    <span asp-validation-for="Sitting.Date" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.SittingTypeId" class="control-label p-1">Sitting Type</label>
+                    <select asp-for="Sitting.SittingTypeId" class="form-control" asp-items="Model.SittingTypeListItems"></select>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.StartTimeId" class="control-label p-1"></label>
+                    <select asp-for="Sitting.StartTimeId" class="form-control" asp-items="timeslotList" id="startTime"></select>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.EndTimeId" class="control-label p-1"></label>
+                    <select asp-for="Sitting.EndTimeId" class="form-control" asp-items="timeslotList" id="endTime"></select>
+                </div>
+                @*<div class="form-group mb-4">
+                <label asp-for="Sitting.ScheduleId" class="control-label p-1"></label>
+                <select asp-for="Sitting.ScheduleId" class ="form-control" asp-items="ViewBag.ScheduleId"></select>
+                </div>*@
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.Status" class="control-label p-1"></label>
+                    <select asp-for="Sitting.Status" class="form-control" asp-items="@Html.GetEnumSelectList<Sitting.StatusEnum>()"></select>
+                    <span asp-validation-for="Sitting.Status" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4 d-flex justify-content-between align-items-center">
+                    <a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+                        <i class="bi bi-arrow-left"></i>
+                        Back to List
+                    </a>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+    document.getElementById('dateInput').placeholder = new Date().toISOString().split('T')[0];
+</script>
+
+

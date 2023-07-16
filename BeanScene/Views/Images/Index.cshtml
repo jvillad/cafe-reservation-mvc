@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BeanScene.Models.Image>
+@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+@{
+    ViewData["Title"] = "The Place";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+    applicationUser.UserManager = UserManager;
+
+    if (applicationUser.IsManager)
+        Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+
+    else
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+    
+        <h2 class="text-center title mt-5">@ViewData["Title"]</h2>
+        @if (applicationUser.IsManager)
+        {
+            <a asp-action="Create" class="btn create-new-btn">
+                <i class="bi bi-plus-lg" aria-hidden="true" aria-label="Create New"></i>
+                Create New
+            </a>
+        }
+
+  
+    <div class="image-gallery my-5">
+        @foreach (var item in Model)
+        {
+            <div class="image-card">
+                <img src="@Url.Content(item.Url)" alt="@item.Description">
+                <div class="card-overlay">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.FileName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+            </div>
+        }
+    </div>
+    <p class="text-muted small text-center my-5">* CTTO. Usage of images is for presentation purposes only. No copyright infringement is intended. Photographs: Niveditaa Gupta</p>
+</section>
+

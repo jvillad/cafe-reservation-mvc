@@ -1,0 +1,32 @@
+﻿@model BeanScene.Models.Area
+
+@{
+    ViewData["Title"] = "Create Area";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<section class="container category-create py-5">
+    <div class="row pt-5">
+        <div class="col-md-8 mx-auto">
+            <h4 class="view-title">@ViewData["Title"]</h4>
+            <hr />
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-4">
+                    <label asp-for="Name" class="control-label p-1"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex justify-content-between align-items-center">
+                    <a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+                        <i class="bi bi-arrow-left"></i>
+                        Cancel
+                    </a>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>

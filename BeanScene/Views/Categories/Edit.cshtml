@@ -1,0 +1,44 @@
+﻿@model BeanScene.Models.Category
+
+@{
+	ViewData["Title"] = "Edit Category";
+	Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<section class="container category-edit py-5">
+	<div class="row pt-5">
+		<div class="col-md-8 mx-auto">
+			<h4 class="view-title">@ViewData["Title"]</h4>
+			<hr />
+			<form asp-action="Edit">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<input type="hidden" asp-for="CategoryId" />
+				<div class="form-group mb-4">
+					<label asp-for="CategoryName" class="control-label p-1"></label>
+					<input asp-for="CategoryName" class="form-control" />
+					<span asp-validation-for="CategoryName" class="text-danger"></span>
+				</div>
+				<div class="form-group mb-4">
+					<label asp-for="Description" class="control-label p-1"></label>
+					<textarea asp-for="Description" class="form-control"></textarea>
+					<span asp-validation-for="Description" class="text-danger"></span>
+				</div>
+				<div class="form-group d-flex justify-content-between align-items-center">
+					<a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+						<i class="bi bi-arrow-left"></i>
+						Cancel
+					</a>
+					<div>
+						<input type="submit" value="Save" class="btn btn-primary" />
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

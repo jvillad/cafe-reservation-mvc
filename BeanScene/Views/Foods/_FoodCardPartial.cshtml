@@ -1,0 +1,43 @@
+﻿@model BeanScene.Models.Food
+@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+@{
+	BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+	applicationUser.UserManager = UserManager;
+}
+
+<div class="col food-card-container">
+	<div class="food-card mx-auto">			
+		<div class="food-image-container" style="background-image: url('@Model.ImageThumbnailUrl'); background-position: center">		
+			<div class="food-details">
+				<h3 class="food-name text-center">
+					<a asp-controller="Foods" asp-action="FoodDetails" asp-route-id="@Model.FoodId" class="food-link text-decoration-none">
+						@Model.Name - @Model.Price.ToString("c")
+					</a>
+				</h3>
+				<p class="p-4 food-desc text-center">@Model.ShortDescription</p>
+            
+			</div>
+
+		</div>
+		@if (applicationUser.IsManager)
+		{
+			<div class="d-flex justify-content-between px-4 mt-3">
+				@*<a asp-action="Edit" asp-route-id="@Model.FoodId">Edit</a> |
+			<a asp-action="Details" asp-route-id="@Model.FoodId">Details</a> |
+			<a asp-action="Delete" asp-route-id="@Model.FoodId">Delete</a>*@
+				<a class="btn btn-outline-danger delete-btn" asp-action="Delete" asp-route-id="@Model.FoodId">
+					<i class="bi bi-trash-fill delete-btn" aria-hidden="true" aria-label="Delete"></i> <span class="visually-hidden"> Delete</span>
+				</a>
+				<a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.FoodId">
+					<i class="bi bi-info-square-fill" aria-hidden="true" aria-label="Details"></i><span class="visually-hidden"> Details</span>
+				</a>
+
+				<a class="btn btn-edit" asp-action="Edit" asp-route-id="@Model.FoodId">
+					<i class="bi bi-pencil-fill" aria-hidden="true"></i><span class="visually-hidden"> Edit</span>
+				</a>
+			</div>
+		}
+	</div>
+</div>

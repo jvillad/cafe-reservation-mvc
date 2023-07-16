@@ -1,0 +1,112 @@
+﻿@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+
+@model BeanScene.ViewModels.ReservationViewModel
+@{
+    ViewData["Title"] = "Create Reservation";
+    SelectList timeslotList = new SelectList(Model.Timeslots, "Time", "TimeFormatted");
+
+}
+<div class="register-div">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-11 col-xl-11">
+                <div class="card justify-content-center text-black" style="border-radius: 10px;">
+                    <div class="card-body p-md-4">                   
+                        <h4 class="view-title text-darkgreen">Reservation Form</h4>
+                        <div class="row justify-content-evenly py-5">
+                            <div class="col-md-10 col-lg-6 col-xl-5 d-flex order-1 order-lg-1 image-div">
+                                <img src="https://images.adsttc.com/media/images/610e/fe5a/f91c/8144/a700/0037/slideshow/ELGIN24.jpg?1628372549"
+                                     class="img-fluid register-image" alt="net rip image of a random cafe" style="object-fit: cover; filter: brightness(70%); opacity: .90;">
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-2 form-border mt-5">
+
+                                <form class="mx-1 register-form mb-4 needs-validation" asp-action="Create" method="post" id="registerForm" novalidate>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.Sitting" class="control-label p-1 reservation-labels"></label>
+                                            <select asp-for="SittingId" class="form-control value-input-size " asp-items="Model.SittingsListItems"></select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4 gap-3">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.AreaId" class="control-label p-1 reservation-labels">Area</label>
+                                            <select asp-for="Reservation.AreaId" class="form-control value-input-size" asp-items="Model.AreasListItems"></select>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.NumberOfPeople" class="control-label p-1 reservation-labels"></label>
+                                            <input asp-for="Reservation.NumberOfPeople" class="form-control value-input-size" min="1" max="500" />
+                                            <span asp-validation-for="Reservation.NumberOfPeople" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center gap-3">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.StartTimeId" class="control-label p-1 reservation-labels"></label>
+                                            <select id="Reservation_StartTimeId" asp-for="Reservation.StartTimeId" class="form-control value-input-size" asp-items="timeslotList"></select>
+                                            <span asp-validation-for="Reservation.StartTimeId" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.EndTimeId" class="control-label p-1 reservation-labels"></label>
+                                            <select id="Reservation_EndTimeId" asp-for="Reservation.EndTimeId" class="form-control value-input-size" asp-items="timeslotList"></select>
+                                            <span asp-validation-for="Reservation.EndTimeId" class="text-danger"></span>
+                                        </div>
+                                    </div>                              
+                                    <div class="d-flex flex-row align-items-center mb-4 gap-3">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.FirstName" class="control-label p-1 reservation-labels"></label>
+                                            <input asp-for="Reservation.FirstName" class="form-control value-input-size" />
+                                            <span asp-validation-for="Reservation.FirstName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.LastName" class="control-label p-1 reservation-labels"></label>
+                                            <input asp-for="Reservation.LastName" class="form-control value-input-size" />
+                                            <span asp-validation-for="Reservation.LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.Email" class="control-label p-1 reservation-labels"></label>
+                                            <input asp-for="Reservation.Email" class="form-control value-input-size" />
+                                            <span asp-validation-for="Reservation.Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.Phone" class="control-label p-1 reservation-labels"></label>
+                                            <input asp-for="Reservation.Phone" class="form-control value-input-size" />
+                                            <span asp-validation-for="Reservation.Phone" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Reservation.Note" class="control-label p-1 reservation-labels"></label>
+                                            <textarea asp-for="Reservation.Note" class="form-control value-input-size"></textarea>
+                                            <span asp-validation-for="Reservation.Note" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                    </div>
+                                    <div class="d-flex justify-content-center mb-5">
+
+                                        <button id="registerBtn" type="submit" class="btn btn-form-register w-100">Create Reservation</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+ 
+</script>

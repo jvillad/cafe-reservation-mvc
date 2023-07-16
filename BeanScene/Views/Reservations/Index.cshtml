@@ -1,0 +1,155 @@
+﻿@using BeanScene.Data;
+@model IEnumerable<BeanScene.Models.Reservation>
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+@{
+    BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+    applicationUser.UserManager = UserManager;
+    List<string> statuses = Enum.GetValues(typeof(Reservation.StatusEnum)).Cast<Reservation.StatusEnum>().Select(s => s.ToString()).ToList();
+    if (applicationUser.IsManager)
+    {
+        ViewData["Title"] = "Reservations";
+        Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    }
+    else
+    {
+        ViewData["Title"] = "Current Reservations";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+}
+
+<section class="container pt-4 reservation-index">
+    <div class="mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="view-title text-center align-middle">@ViewData["Title"]</h4>
+            <a asp-action="Create" class="btn create-new-btn align-middle">
+                <i class="bi bi-plus-lg" aria-hidden="true" aria-label="Create New"></i>
+                Create New
+            </a>
+        </div>
+        @using (Html.BeginForm("Index", "Reservations", FormMethod.Get))
+        {
+            <div class="form-group">
+                <div class="d-flex justify-content-end gap-2 ">
+                    <div class="">
+                        @Html.DropDownList("status", new SelectList(statuses), new { @class = "form-control my-dropdown font-md  filter-dropdown" })
+                    </div>
+                    <div class="smol-filter">
+                        <button type="submit" class="btn btn-primary font-md">
+                            <i class="bi bi-search"></i>
+                            Filter
+                        </button>
+                    </div>
+                    <div class="smol-filter">
+                        <a asp-action="Index" class="btn btn-secondary font-md">
+                            <i class="bi bi-x-circle"></i>
+                            Reset
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Res. #
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    // returns a string based on status
+                    string statusClass = item.Status switch
+                    {
+                        Reservation.StatusEnum.Pending => "pending",
+                        Reservation.StatusEnum.Confirmed => "confirmed",
+                        Reservation.StatusEnum.InProgress => "in-progress",
+                        Reservation.StatusEnum.Completed => "completed",
+                        _ => "cancelled"
+                    };
+                    <tr>
+                        <td class="@statusClass align-middle">@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Sitting.Date) - @Html.DisplayFor(modelItem => item.Sitting.SittingType.Name)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.FirstName), @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td class="align-middle">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reservationDetails-@item.Id">
+                                View Details
+                            </button>
+                            <a class="btn btn-edit" asp-action="Edit" asp-route-id="@item.Id" title="Edit Category">
+                                <i class="bi bi-pencil-fill" aria-hidden="true"></i><span class="visually-hidden"> Edit</span>
+                            </a>
+                            <a class="btn btn-edit" asp-action="Details" asp-route-id="@item.Id" title="Edit Reservation">
+                                <i class="bi bi-info-square-fill" aria-hidden="true"></i><span class="visually-hidden"> Details</span>
+                            </a>
+                        </td>
+                        <!-- Modal -->
+                        <td class="modal fade" id="reservationDetails-@item.Id" tabindex="-1" aria-labelledby="reservationDetails-@item.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="reservationDetails-@item.Id">Reservation Details</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex gap-2 mb-4">
+                                            @foreach (Reservation.StatusEnum status in Enum.GetValues(typeof(Reservation.StatusEnum)))
+                                            {
+                                                string cssClass = @item.Status == status ? "active" : "";
+                                                <a asp-action="Edit" asp-route-id="@item?.Id" asp-route-status="@status.ToString()"
+                                                   class="btn @cssClass status-@status.ToString()" title="Status @status.ToString()">
+                                                   
+                                                    @status.ToString()
+                                                </a>
+                                            }
+                                        </div>
+                                        <p><strong>Area:</strong> @Html.DisplayFor(modelItem => item.Area.Name)</p>
+                                        <p><strong>Status:</strong> @Html.DisplayFor(modelItem => item.Status)</p>
+                                        <p><strong>Duration:</strong> @Html.DisplayFor(modelItem => item.StartTime.Time) - @Html.DisplayFor(modelItem => item.EndTime.Time)</p>
+                                        <p><strong>Email:</strong> @Html.DisplayFor(modelItem => item.Email)</p>
+                                        <p><strong>Phone:</strong> @Html.DisplayFor(modelItem => item.Phone)</p>
+                                        <p><strong>Note:</strong> @Html.DisplayFor(modelItem => item.Note)</p>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+
+                                        @* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+
+                                        <a class="btn btn-outline-danger delete-btn" asp-action="Delete" asp-route-id="@item.Id" title="Delete Category">
+                                            <i class="bi bi-trash-fill delete-btn" aria-hidden="true" aria-label="Delete"></i> <span class="visually-hidden"> Delete</span>
+                                        </a>
+
+                                        <a class="btn btn-edit" asp-action="Edit" asp-route-id="@item.Id" title="Edit Reservation">
+                                            <i class="bi bi-pencil-fill" aria-hidden="true"></i><span class="visually-hidden"> Edit</span>
+                                        </a>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</section>

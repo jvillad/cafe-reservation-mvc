@@ -1,0 +1,32 @@
+﻿@model List<BeanScene.ViewModels.CalendarViewModel>
+
+@{
+    ViewData["Title"] = "Management";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+<section class="management-container">
+    <h4 class="view-title">Management Section</h4>
+
+    <div class="p-4">
+    <div id="calendar"></div>
+    </div>
+</section>
+
+@section Scripts
+    // https://stackoverflow.com/questions/63197868/razor-pages-asp-net-core-install-fullcalendar
+    {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script>
+        $(function () {
+            // Initialize FullCalendar
+            $('#calendar').fullCalendar({
+                events: @Html.Raw(Json.Serialize(Model)),
+                eventClick: function (calEvent, jsEvent, view) {
+                    window.location.href = calEvent.url;
+                }
+            });
+        });
+    </script>
+}

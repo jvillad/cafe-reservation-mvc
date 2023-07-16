@@ -1,0 +1,83 @@
+﻿@model BeanScene.Models.Food
+
+@{
+    ViewData["Title"] = "Delete Food";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<section class="container category-delete py-5">
+    <div class="col-md-8 mx-auto">
+        @*<h3>@ViewData["Title"]</h3>*@
+        @* <hr />*@
+        <h4 class="view-title">Are you sure you want to delete <span class="text-danger">@Model.Name?</span></h4>
+        <div>
+            <dl class="row">
+                <dt class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                @*<dt class="col-md-3">
+                @Html.DisplayNameFor(model => model.ShortDescription)
+                </dt>
+                <dd class="col-md-10">
+                @Html.DisplayFor(model => model.ShortDescription)
+                </dd>*@
+                <dt class="col-md-3">
+                    @Html.DisplayNameFor(model => model.LongDescription)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.LongDescription)
+                </dd>
+                <dt class="col-md-3">
+                    @Html.DisplayNameFor(model => model.AllergyInformation)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.AllergyInformation)
+                </dd>
+                <dt class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                @*  <dt class="col-md-3">
+                @Html.DisplayNameFor(model => model.ImageUrl)
+                </dt>
+                <dd class="col-md-10">
+                @Html.DisplayFor(model => model.ImageUrl)
+                </dd>
+                <dt class="col-md-3">
+                @Html.DisplayNameFor(model => model.ImageThumbnailUrl)
+                </dt>
+                <dd class="col-md-10">
+                @Html.DisplayFor(model => model.ImageThumbnailUrl)
+                </dd>*@
+                <dt class="col-md-3">
+                    @Html.DisplayNameFor(model => model.WeeklySpecial)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.WeeklySpecial)
+                </dd>
+                <dt class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.Category.CategoryName)
+                </dd>
+            </dl>
+
+            <div class="d-flex justify-content-between aligh-items-center">
+                <a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+                    <i class="bi bi-arrow-left"></i>
+                    Cancel
+                </a>
+                <form asp-action="Delete" class="text-end">
+                    <input type="hidden" asp-for="CategoryId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,100 @@
+﻿@model BeanScene.Models.Food
+@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Details";
+    BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+    applicationUser.UserManager = UserManager;
+
+    if (applicationUser.IsManager)
+        Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+
+    else
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="container mt-4">
+    <div class="mx-auto">
+        <div>
+            <h4 class="view-title">Food</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                @*<dt class="col-md-2">
+                @Html.DisplayNameFor(model => model.ShortDescription)
+                </dt>
+                <dd class="col-md-10">
+                @Html.DisplayFor(model => model.ShortDescription)
+                </dd>*@
+                <dt class="col-md-2">
+                    @Html.DisplayNameFor(model => model.LongDescription)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.LongDescription)
+                </dd>
+                <dt class="col-md-2">
+                    @Html.DisplayNameFor(model => model.AllergyInformation)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.AllergyInformation)
+                </dd>
+                <dt class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                @*
+                <dt class="col-md-2">
+                @Html.DisplayNameFor(model => model.ImageUrl)
+                </dt>
+                <dd class="col-md-10">
+                @Html.DisplayFor(model => model.ImageUrl)
+                </dd>
+                <dt class="col-md-2">
+                @Html.DisplayNameFor(model => model.ImageThumbnailUrl)
+                </dt>
+                <dd class="col-md-10">
+                @Html.DisplayFor(model => model.ImageThumbnailUrl)
+                </dd>
+                *@
+                <dt class="col-md-2">
+                @Html.DisplayNameFor(model => model.WeeklySpecial)
+                </dt>
+             
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.WeeklySpecial)
+                </dd>
+                <dt class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+                <dd class="col-md-10">
+                    @Html.DisplayFor(model => model.Category.CategoryName)
+                </dd>
+            </dl>
+        </div>
+        <div class="d-flex justify-content-between aligh-items-center">
+
+            <a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+                <i class="bi bi-arrow-left"></i>
+                Back to List
+            </a>
+
+            <div class="d-flex gap-3">
+                <a asp-action="Edit" asp-route-id="@Model?.FoodId" class="btn btn-edit">Edit</a>
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model?.FoodId" title="Delete Food">
+                    <i class="bi bi-trash-fill" aria-hidden="true" aria-label="Delete"></i> <span class="visually-hidden"> Delete</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>

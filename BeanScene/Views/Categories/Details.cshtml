@@ -1,0 +1,43 @@
+﻿@model BeanScene.Models.Category
+
+@{
+	ViewData["Title"] = "Category Details";
+	Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+<section class="container category-details py-5">
+	<div class="col-md-8 mx-auto">
+		<h4 class="view-title">@ViewData["Title"]</h4>
+		<hr />
+		<dl class="row p-1">
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.CategoryName)
+			</dt>
+			<dd class="col-sm-10 fw-bold">
+				@Html.DisplayFor(model => model.CategoryName)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Description)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Description)
+			</dd>
+		</dl>
+		<hr />
+		<div class="d-flex justify-content-between aligh-items-center">
+
+			<a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+				<i class="bi bi-arrow-left"></i>
+				Back to List
+			</a>
+
+			<div class="d-flex gap-3">
+				<a asp-action="Edit" asp-route-id="@Model?.CategoryId" class="btn btn-edit">Edit</a>
+				<a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model?.CategoryId" title="Delete Category">
+					<i class="bi bi-trash-fill" aria-hidden="true" aria-label="Delete"></i> <span class="visually-hidden"> Delete</span>
+				</a>				
+			</div>
+
+		</div>
+	</div>
+
+</section>

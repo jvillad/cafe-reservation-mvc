@@ -1,0 +1,207 @@
+﻿@page
+@model RegisterModel
+@{
+	ViewData["Title"] = "Register";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="register-div">
+	<div class="container h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-lg-11 col-xl-11">
+				<div class="card justify-content-center text-black" style="border-radius: 10px;">
+					<div class="card-body p-md-4">
+						<div class="row justify-content-evenly py-5">
+							<div class="col-md-10 col-lg-6 col-xl-5 order-1 order-lg-1 form-border">
+								<div class="text-center mt-4">
+									<h4 class="fw-bold mx-1">Create your Account</h4>
+									<p class="text-muted  mx-1 py-4">
+										Already have an account? <a asp-area="Identity" asp-page="/Account/Login" class="fw-bold text-body"><u>Login here</u></a>
+									</p>
+								</div>
+								<form class="mx-1 register-form mb-4" asp-route-returnUrl="@Model.ReturnUrl" method="post" id="registerForm">
+									<div class="d-flex flex-row align-items-center mb-4 gap-3">
+
+										<div class="form-outline flex-fill mb-0">
+											<label class="form-label register-labels" for="firstname">First Name</label>
+											<input type="text" id="firstname" class="form-control" autocomplete="firstname" aria-required="true"
+												   asp-for="Input.FirstName" placeholder="Firstname"/>
+											<span asp-validation-for="Input.FirstName" class="text-danger"></span>
+										</div>
+
+										<div class="form-outline flex-fill mb-0">
+											<label class="form-label register-labels" for="lastname">Last Name</label>
+											<input autocomplete="firstname" aria-required="true" placeholder="Lastname" type="text" id="lastname" class="form-control" asp-for="Input.LastName" />
+											<span asp-validation-for="Input.LastName" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="d-flex flex-row align-items-center mb-4">
+										<div class="form-outline flex-fill mb-0">
+											<label class="form-label register-labels" for="email">Your Email</label>
+											<input type="email" id="email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" asp-for="Input.Email" />
+											<span asp-validation-for="Input.Email" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="d-flex flex-row align-items-center  gap-3">
+										<div class="form-outline flex-fill mb-0">
+											<label class="form-label register-labels" for="password">Password</label>
+											<input type="password" id="password" class="form-control" asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="Password" />
+											<span asp-validation-for="Input.Password" class="text-danger"></span>
+										</div>
+										<div class="form-outline flex-fill mb-0">
+											<label class="form-label register-labels" for="repeat-password">Confirm Password</label>
+											<input type="password" id="repeat-password" class="form-control" asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
+											<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="d-flex flex-row align-items-center mb-4">
+									</div>
+
+									<div class="form-check d-flex  align-items-center mb-2">
+										<input class="form-check-input me-2" type="checkbox" value="" id="checkbox" required/>
+										<label class="form-check-label" for="checkbox">
+											I agree on all statements in <a href="#!">Terms of service</a>
+										</label>
+									</div>
+									<div class="form-check d-flex  mb-5 align-items-center">
+										<input class="form-check-input me-2" type="checkbox" value="" id="checkbox" />
+										<label class="form-check-label" for="checkbox">
+											Email me about product updates and promotions
+										</label>
+									</div>
+									<div class="d-flex justify-content-center mb-5">
+										<button id="registerBtn" type="submit" class="btn btn-form-register w-100">Register</button>
+									</div>
+
+								</form>
+
+							</div>
+							<div class="col-md-10 col-lg-6 col-xl-5 d-flex order-2 order-lg-2 image-div">
+								<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+									 class="img-fluid register-image" alt="egg breakfast with a coffee" style="object-fit: cover">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@*<div class="row">
+	<section class="pt-100">
+		<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+			<div class="container h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+						<div class="card"
+							 style="border-radius: 15px; background: hsla(0, 0%, 0%, 0.25); backdrop-filter: blur(30px);">
+							<div class="card-body p-5">
+								<h2 class="text-uppercase text-center mb-5 text-white">Create an account</h2>
+								<form>
+									<div class="d-flex flex-row align-items-center mb-4 gap-3">
+										<span class="material-symbols-outlined text-white register-icon">
+											person
+										</span>
+										<div class="form-outline flex-fill mb-0">
+											<input asp-for="Input.FirstName"
+			   class="form-control form-control-lg form-rounded register-input"
+			   autocomplete="firstname"
+			   aria-required="true"
+			   placeholder="Firstname" />
+											<span asp-validation-for="Input.FirstName" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="d-flex flex-row align-items-center mb-4 gap-3">
+										<span class="material-symbols-outlined text-white register-icon">
+											person
+										</span>
+										<div class="form-outline flex-fill mb-0">
+											<input asp-for="Input.LastName"
+			   class="form-control form-control-lg form-rounded register-input"
+			   autocomplete="firstname"
+			   aria-required="true"
+			   placeholder="Lastname" />
+											<span asp-validation-for="Input.LastName" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="d-flex flex-row align-items-center mb-4 gap-3">
+										<span class="material-symbols-outlined text-white register-icon">
+											mail
+										</span>
+										<div class="form-outline flex-fill mb-0">
+											<input asp-for="Input.Email"
+			   class="form-control form-control-lg form-rounded register-input"
+			   autocomplete="username"
+			   aria-required="true"
+			   placeholder="Email" />
+											<span asp-validation-for="Input.Email" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="d-flex flex-row align-items-center mb-4 gap-3">
+										<span class="material-symbols-outlined text-white register-icon">
+											lock
+										</span>
+										<div class="form-outline flex-fill mb-0">
+											<input asp-for="Input.Password"
+			   class="form-control form-control-lg form-rounded register-input"
+			   autocomplete="new-password"
+			   aria-required="true"
+			   placeholder="Password" />
+											<span asp-validation-for="Input.Password" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="d-flex flex-row align-items-center mb-4 gap-3">
+										<span class="material-symbols-outlined text-white register-icon">
+											key
+										</span>
+										<div class="form-outline flex-fill mb-0">
+											<input asp-for="Input.ConfirmPassword"
+			   class="form-control form-control-lg form-rounded register-input"
+			   autocomplete="new-password"
+			   aria-required="true"
+			   placeholder="Confirm Password" />
+											<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+										</div>
+									</div>
+
+									<div class="form-check d-flex justify-content-center mb-5">
+										<input class="form-check-input me-2" type="checkbox" value="" id="" />
+										<label class="form-check-label " for="">
+											<span class="text-white">I agree all statements in <a href="#!" class="text-body"><u class="text-white">Terms of service</u></a></span>
+										</label>
+									</div>
+
+									<div class="d-flex justify-content-center">
+										<button type="button"
+												class="btn btn-rounded btn-block btn-lg gradient-custom-4 text-body">
+											Register
+										</button>
+									</div>
+
+									<p class="text-center text-muted mt-5 mb-0 ">
+										<span class="text-white">Have already an account? </span><a id="" asp-area="Identity" asp-page="/Account/Login" class="fw-bold text-body"><u class="text-white">Login here</u></a>
+									</p>
+
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>*@
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

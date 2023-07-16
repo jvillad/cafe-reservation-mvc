@@ -1,0 +1,225 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+<div id="loading">
+    <h1 class="blinking-text">Bean Scene</h1>
+</div>
+
+
+
+<section class="banner mb-3"
+         style="background-image: url('https://res.cloudinary.com/supremevillad/image/upload/v1677406769/kuya_with_pins2_duym0s.jpg');  position: relative;">
+    <div class="banner-mask">
+        <div class="pt-50">
+            <h1 class="beanscene-h1 font-staatliches banner-info">
+                Bean Scene
+            </h1>
+
+        </div>
+        <h4 class="font-inter banner-info text-flesh beanscene-h4">Your daily sponsor of caffeine and kindness</h4>
+        <div class="d-flex justify-content-center gap-3 banner-info">
+            <div class="d-flex justify-content-center gap-3 py-4 entry-links">               
+                <a asp-controller="Reservations" asp-action="Create" class="btn btn-rounded  d-flex align-items-center justify-content-center">
+                    <span class="material-symbols-outlined">
+                        calendar_month
+                    </span><span>MAKE A RESERVATION</span>
+
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container py-5 ">
+        <div class="text-center intro-section">
+            <h2 class="font-inter fw-bolder slogan"><span class="intro-slogan">WHERE</span> COFFEE MEETS CUISINE</h2>
+            <h3 class="font-inter">"The ultimate best cafe in Sydney" — Jack Reacher</h3>
+            <p class="w-75 mx-auto ">As acclaimed by Jack Reacher, we pride ourselves on being the ultimate destination for coffee enthusiasts and food lovers alike. </p>
+        </div>
+    </div>
+    <div class="card-container mx-auto margin-bot overflow-hidden">
+        <div class="row text-white justify-content-center align-items-center">
+            <div class="col-lg-6 mt-3 d-flex justify-content-center wider-div">
+                <a asp-controller="Foods" asp-action="ViewAll" class="the-place">
+                    <div class="card card-menu bg-cover card-size card-index" style="background-image: url(https://res.cloudinary.com/supremevillad/image/upload/v1680593166/menu-index_l2rsey.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Our Menu</h5>
+                            <p class="card-text text-center">Food so good, it'll make you forget your troubles. Come hungry, leave with a belly full of happiness. Ultimate Satisfaction guaranteed!</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 mt-3 d-flex justify-content-center wider-div">
+                <a asp-controller="Images" asp-action="Index" class="the-place">
+                    <div class="card card-place bg-cover card-size card-index" style="background-image: url(https://res.cloudinary.com/supremevillad/image/upload/v1680596450/the-place_cyouba.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">The Place</h5>
+                            <p class="card-text text-center">Where good vibes brew and flavors delight. Step into our cozy oasis and treat yourself to a moment of pure bliss.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="about-section">
+    <div class="container">
+        <div class="about d-flex align-items-center justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
+                    <div>
+                        <h1 class="about-us">About Us</h1>
+                        <p>
+                            Welcome to Bean Scene, where we roast our jokes as perfectly as we roast our coffee beans! Our restaurant is a brew-tiful blend of delicious food and hilarious shenanigans.
+                            <br />
+                            <br />
+                            <span class=" fw-bolder">Why did the coffee file a police report? It got mugged! </span>😉  But don't worry, our baristas are experts at foaming milk, not committing crimes.
+                            <br />
+                            <br />
+                            At Bean Scene, we believe in serving up more than just scrumptious dishes. Our staff has been trained in the art of comedy, so you can expect a side of laughter with every order. We're here to perk up your day and tickle your taste buds simultaneously!
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <img class="img-fluid rounded" src="https://images.unsplash.com/photo-1518481335010-06c24f4626de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="my-4 social-section">
+    <div class="text-center">
+        <h4>Join our social and tag us in your photos! <span class="insta-tag">@@beanscene</span></h4>
+        <a href="https://www.facebook.com/beanscenecafe/" target="_blank" rel="noopener">       <i class="bi bi-facebook social-icon"></i></a>
+
+        <a href="https://www.instagram.com/beanscenecafe/" target="_blank" rel="noopener"><i class="bi bi-instagram social-icon"></i></a>
+    </div>
+    <div class="social-photos-container">
+        <figure class="social-photo">
+            <img src="https://res.cloudinary.com/supremevillad/image/upload/c_fill,h_320,w_420/v1686228022/BeanScene%20Related/coffee-social_bjh0z8.jpg" alt="unsplash image" />
+            <i class="bi bi-instagram social-icon"></i>
+            <a href="https://www.instagram.com/beanscenecafe/" target="_blank" rel="noopener"></a>
+        </figure>
+        <figure class="social-photo">
+            <img src="https://res.cloudinary.com/supremevillad/image/upload/c_fill,h_320,q_100,w_420/v1686228347/BeanScene%20Related/maddi-bazzocco-j3gz0KReZbA-unsplash_mcbkfz.jpg" alt="unsplash image" />
+            <i class="bi bi-instagram social-icon"></i>
+            <a href="https://www.instagram.com/beanscenecafe/" target="_blank" rel="noopener"></a>
+        </figure>
+        <figure class="social-photo">
+            <img src="https://res.cloudinary.com/supremevillad/image/upload/c_scale,h_320,w_420/v1686228933/BeanScene%20Related/rodeo-project-management-software-PYqzYhTNjho-unsplash_ieew3f.jpg" alt="unsplash image" />
+            <i class="bi bi-instagram social-icon"></i>
+            <a href="https://www.instagram.com/beanscenecafe/" target="_blank" rel="noopener"></a>
+        </figure>
+    </div>
+</section>
+
+<footer class="text-center text-muted mb-0 pb-0 bg-white">
+    <hr class="p-0 m-0">
+
+    <section>
+        <div class="container text-center text-md-start mt-2">
+
+            <div class="row mt-3">
+
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                    <h6 class="text-uppercase fw-bold mb-4 d-flex align-items-center gap-2">
+                        <i class="bi bi-book"></i>Dreamtime Libraries
+                    </h6>
+                    <p>
+                        Please note that bookings are subject to availability. We recommend making your reservations in advance to secure your desired time slot. Bean Scene Staff is ready to assist you with any inquiries or assistance you may need.
+                    </p>
+                </div>
+
+
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 hours">
+
+                    <h6 class="text-uppercase fw-bold mb-4 d-flex align-items-center gap-2">
+                        <i class="bi bi-alarm"></i>
+                        Hours
+                    </h6>
+                    <div class="p-1">
+                        <p>
+                            <a href="#!" class="text-reset"> <span>Monday</span> - 9:00AM — 9:00PM </a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset"> <span>Tuesday</span>  - 9:00AM — 9:00PM </a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset"> <span>Wednesday</span>  - 9:00AM — 9:00PM </a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset"> <span>Thursday</span>  - 9:00AM — 9:00PM </a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset"> <span>Friday</span>  - 9:00AM — 9:00PM </a>
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 help-links">
+
+                    <h6 class="text-uppercase fw-bold mb-4 d-flex align-items-center gap-2">
+                        <i class="bi bi-info-circle"></i>
+                        Useful links
+                    </h6>
+                    <div class="p-1">
+                        <p>
+                            <a href="#!" class="text-reset">Branches</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Reservations</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Contact Us</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                    <h6 class="text-uppercase fw-bold mb-4 d-flex align-items-center gap-2">
+                        <i class="bi bi-telephone"></i>
+                        Contact
+                    </h6>
+                    <div class="p-1">
+                        <p>Sydney, Sydney, NSW</p>
+                        <p>
+
+                            info@beanscene.com
+                        </p>
+                        <p class="text-primary"> + 123-456-789 </p>
+                        <p class="text-secondary"> + 123-456-789 </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <div class="text-center footer-bg copyright">
+        <hr class="p-0 m-0">
+        <div class="py-3">
+            <span class="mx-4">
+                &copy; 2023 - Bean Scene - <a asp-area="" asp-controller="Home" aspaction="Privacy">Privacy</a>
+            </span>
+            <p class="p-0 m-0">
+                Created using <span class="fw-bold">.Net Core MVC</span> + <span class="fw-bold">MS-SQL</span> + <span class="fw-bold">Bootstrap 5</span>
+            </p>
+        </div>
+    </div>
+
+</footer>
+

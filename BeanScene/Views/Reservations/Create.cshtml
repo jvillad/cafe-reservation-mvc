@@ -1,0 +1,33 @@
+﻿@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+
+@model BeanScene.ViewModels.ReservationViewModel
+@{
+    ViewData["Title"] = "Create Reservation";
+    BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+    applicationUser.UserManager = UserManager;
+    if (applicationUser.IsManager)
+    {
+        Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    }
+    else
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+   
+    SelectList timeslotList = new SelectList(Model.Timeslots, "Time", "TimeFormatted");
+
+}
+
+@if(applicationUser.IsManager)
+{
+    <partial name="_CreatePartialManager"/>
+}
+else
+{
+    <partial name="_CreatePartialUser" />
+
+}
+
+
+

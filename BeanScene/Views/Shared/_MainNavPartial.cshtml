@@ -1,0 +1,74 @@
+﻿@using BeanScene.Data;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+
+@{
+    // Get the current logged-in user (and pass through the UserManager context)
+    BeanSceneApplicationUser user = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser();
+    user.UserManager = UserManager;
+}
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center container">
+        <a class="navbar-brand mb-2" asp-controller="Home" asp-action="Index">
+            <img src="~/svg/dark-logo.svg" alt="bean scene primary logo" class="beanscene-logo mx-auto" />
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     class="feather feather-align-justify nav-btn-icon">
+                    <line x1="21" y1="10" x2="3" y2="10">
+                    </line>
+                    <line x1="21" y1="6" x2="3" y2="6">
+                    </line>
+                    <line x1="21" y1="14" x2="3" y2="14">
+                    </line>
+                    <line x1="21" y1="18" x2="3" y2="18">
+                    </line>
+                </svg>
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav flex-grow-1 gap-3 text-white justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" asp-controller="Home" asp-action="Index">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Foods" asp-action="Index">MENU</a>
+                </li>
+                @*<vc:category-menu></vc:category-menu>*@
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Contact" asp-action="Index">CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    @if (user.IsManager || user.IsStaff)
+                    {
+                        <a class="nav-link link-gap" asp-controller="Reservations" asp-action="Index">RESERVATION</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link link-gap" asp-controller="Reservations" asp-action="Create">MAKE RESERVATION</a>
+                    }
+                </li>
+            </ul>
+            <div class="">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </div>
+</nav>

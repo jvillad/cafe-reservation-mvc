@@ -1,0 +1,35 @@
+﻿@model BeanScene.Models.Area
+
+@{
+    ViewData["Title"] = "Delete Area";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<section class="container category-delete py-5">
+    <div class="col-md-8 mx-auto">
+        @*<h4>@ViewData["Title"]</h4>*@
+        @*<hr />*@
+        <h3 class="py-4 view-title">Are you sure you want to delete this <span class="text-danger">@Model.Name?</span></h3>
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+            <div class="d-flex justify-content-between aligh-items-center">
+                <a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+                    <i class="bi bi-arrow-left"></i>
+                    Cancel
+                </a>
+                <form asp-action="Delete" class="text-end">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>

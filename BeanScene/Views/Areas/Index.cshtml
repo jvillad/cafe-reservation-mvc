@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BeanScene.Models.Area>
+
+@{
+    ViewData["Title"] = "Areas";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<section class="container category-index pt-4">
+    <div class="mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-center align-middle view-title">@ViewData["Title"]</h2>
+            <a asp-action="Create" class="btn create-new-btn align-middle">
+                <i class="bi bi-plus-lg" aria-hidden="true" aria-label="Add Area"></i>
+                Add Area
+            </a>
+        </div>
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="align-middle">
+
+                            <a class="btn btn-edit" asp-action="Edit" asp-route-id="@item.Id" title="Edit Area">
+                                <i class="bi bi-pencil-fill" aria-hidden="true"></i><span class="visually-hidden"> Edit</span>
+                            </a>
+                            <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id" title="Area Details">
+                                <i class="bi bi-info-square-fill" aria-hidden="true" aria-label="Details"></i><span class="visually-hidden"> Details</span>
+                            </a>
+                            <a class="btn btn-outline-danger delete-btn" asp-action="Delete" asp-route-id="@item.Id" title="Delete Area">
+
+                                <i class="bi bi-trash-fill delete-btn" aria-hidden="true" aria-label="Delete"></i> <span class="visually-hidden"> Delete</span>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

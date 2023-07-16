@@ -1,0 +1,8 @@
+﻿@model IEnumerable<BeanScene.Models.Food>
+
+<div class="row  g-4 ">
+    @foreach (var food in Model)
+    {
+        <partial name="_FoodCardPartial" model="food" />
+    }
+</div>

@@ -1,0 +1,80 @@
+﻿@model BeanScene.Models.Food
+
+@{
+    ViewData["Title"] = "Edit Food";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+<section class="container category-edit mt-5">
+    <div class="row mt-4">
+        <div class="col-md-8 mx-auto">	
+                    <h4 class="view-title">@ViewData["Title"]</h4>
+            <hr />
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="FoodId" />
+                <div class="form-group mb-4">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="ShortDescription" class="control-label"></label>
+                    <input asp-for="ShortDescription" class="form-control" />
+                    <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="LongDescription" class="control-label"></label>
+                    <input asp-for="LongDescription" class="form-control" />
+                    <span asp-validation-for="LongDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="AllergyInformation" class="control-label"></label>
+                    <input asp-for="AllergyInformation" class="form-control" />
+                    <span asp-validation-for="AllergyInformation" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="ImageUrl" class="control-label"></label>
+                    <input asp-for="ImageUrl" class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="ImageThumbnailUrl" class="control-label"></label>
+                    <input asp-for="ImageThumbnailUrl" class="form-control" />
+                    <span asp-validation-for="ImageThumbnailUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check mb-4">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="WeeklySpecial" /> @Html.DisplayNameFor(model => model.WeeklySpecial)
+                    </label>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+               <div class="form-group d-flex justify-content-between align-items-center">
+                    <a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+                        <i class="bi bi-arrow-left"></i>
+                        Back to List
+                    </a>
+                    <div>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

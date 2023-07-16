@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BeanScene.Models.Food>
+@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Our Menu";
+    BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+    applicationUser.UserManager = UserManager;
+
+    if (applicationUser.IsManager)
+        Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+
+    else
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="w-100 pt-4 container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="view-title">@ViewData["Title"]</h4>
+        @if (applicationUser.IsManager)
+        {
+            <a asp-action="Create" class="btn create-new-btn align-middle">
+                <i class="bi bi-plus-lg" aria-hidden="true" aria-label="Create New"></i>
+                Create New
+            </a>
+        }
+
+    </div>
+    <div class="d-flex flex-row w-100 flex-wrap overflow-auto vh-100">
+        <partial name="_FoodCardListPartial" model="Model" />
+    </div>
+</section>

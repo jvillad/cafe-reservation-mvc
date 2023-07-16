@@ -1,0 +1,113 @@
+﻿@model BeanScene.ViewModels.ReservationViewModel
+@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+@{
+     BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+    applicationUser.UserManager = UserManager;
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    SelectList timeslotList = new SelectList(Model.Timeslots, "Time", "TimeFormatted");
+     if(applicationUser.IsManager) 
+    {
+        ViewData["Title"] = "Reservations";
+        Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    }
+    else
+    {
+        ViewData["Title"] = "Current Reservations";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+<h4 class="view-title my-4 text-center">Editting Reservation @Model.Reservation.Id</h4>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Reservation.Id" />
+          @*  <div class="form-group mb-3 mb-3">
+                <label asp-for="Reservation.UserId" class="control-label p-1"></label>
+                <select asp-for="Reservation.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="Reservation.UserId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Reservation.Sitting" class="control-label p-1"></label>
+                    <select asp-for="SittingId" class="form-control" asp-items="Model.SittingsListItems"></select>
+                </div>
+                  <div class="col-md-6">
+                    <label asp-for="Reservation.NumberOfPeople" class="control-label p-1"></label>
+                    <input asp-for="Reservation.NumberOfPeople" class="form-control" />
+                    <span asp-validation-for="Reservation.NumberOfPeople" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="form-group mb-3">
+                <label asp-for="Reservation.SittingSittingTypeId" class="control-label p-1"></label>
+                <select asp-for="Reservation.SittingSittingTypeId" class="form-control" asp-items="Model.SittingsListItems"></select>
+                <span asp-validation-for="Reservation.SittingSittingTypeId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group mb-3">
+                <label asp-for="Reservation.AreaId" class="control-label p-1"></label>
+                <select asp-for="Reservation.AreaId" class="form-control" asp-items="Model.AreasListItems"></select>
+                <span asp-validation-for="Reservation.AreaId" class="text-danger"></span>
+            </div>
+    
+            <div class="form-group row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Reservation.StartTimeId" class="control-label p-1"></label>
+                    <select asp-for="Reservation.StartTimeId" class="form-control" asp-items="timeslotList"></select>
+                    <span asp-validation-for="Reservation.StartTimeId" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Reservation.EndTimeId" class="control-label p-1"></label>
+                    <select asp-for="Reservation.EndTimeId" class="form-control" asp-items="timeslotList"></select>
+                    <span asp-validation-for="Reservation.EndTimeId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Reservation.FirstName" class="control-label p-1"></label>
+                    <input asp-for="Reservation.FirstName" class="form-control" />
+                    <span asp-validation-for="Reservation.FirstName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Reservation.LastName" class="control-label p-1"></label>
+                    <input asp-for="Reservation.LastName" class="form-control" />
+                    <span asp-validation-for="Reservation.LastName" class="text-danger"></span>
+                </div>
+            </div>          
+            <div class="form-group mb-3">
+                <label asp-for="Reservation.Email" class="control-label p-1"></label>
+                <input asp-for="Reservation.Email" class="form-control" />
+                <span asp-validation-for="Reservation.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Reservation.Phone" class="control-label p-1"></label>
+                <input asp-for="Reservation.Phone" class="form-control" />
+                <span asp-validation-for="Reservation.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Reservation.Note" class="control-label p-1"></label>
+                <input asp-for="Reservation.Note" class="form-control" />
+                <span asp-validation-for="Reservation.Note" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Reservation.Status" class="control-label p-1"></label>
+                <select asp-for="Reservation.Status" class="form-control" asp-items="@Html.GetEnumSelectList<Reservation.StatusEnum>()"></select>
+                <span asp-validation-for="Reservation.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group d-flex justify-content-between align-items-center">
+					<a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+						<i class="bi bi-arrow-left"></i>
+						Back to List
+					</a>
+					<div>
+						<input type="submit" value="Save" class="btn btn-primary" />
+					</div>
+
+				</div>
+        </form>
+    </div>
+</div>
+
+

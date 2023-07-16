@@ -1,0 +1,60 @@
+﻿@model BeanScene.ViewModels.SittingViewModel
+
+@{
+    ViewData["Title"] = "Edit Sitting";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+
+    // Create select lists for start & end times
+    SelectList timeslotList = new SelectList(Model.Timeslots, "Time", "TimeFormatted");
+}
+
+<section class="container category-edit py-5">
+    <div class="row pt-5">
+        <div class="col-md-8 mx-auto">
+            <h4 class="view-title">@ViewData["Title"]</h4>
+            <hr />
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Sitting.Date" />
+                <input type="hidden" asp-for="Sitting.SittingTypeId" />
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.Date" class="control-label p-1"></label>
+                    <input asp-for="Sitting.Date" class="form-control" disabled />
+                    <span asp-validation-for="Sitting.Date" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.SittingTypeId" class="control-label p-1">Sitting Type</label>
+                    <select asp-for="Sitting.SittingTypeId" class="form-control" asp-items="Model.SittingTypeListItems" disabled></select>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.StartTimeId" class="control-label p-1"></label>
+                    <select asp-for="Sitting.StartTimeId" class="form-control" asp-items="timeslotList"></select>
+                    <span asp-validation-for="Sitting.StartTimeId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.EndTimeId" class="control-label p-1"></label>
+                    <select asp-for="Sitting.EndTimeId" class="form-control" asp-items="timeslotList"></select>
+                    <span asp-validation-for="Sitting.EndTimeId" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Sitting.Status" class="control-label p-1"></label>
+                    <select asp-for="Sitting.Status" class="form-control" asp-items="@Html.GetEnumSelectList<Sitting.StatusEnum>()"></select>
+                    <span asp-validation-for="Sitting.Status" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4 d-flex justify-content-between align-items-center">
+                    <a asp-action="Index" class="underline-offset p-1 text-secondary pointing">
+                        <i class="bi bi-arrow-left"></i>
+                        Cancel
+                    </a>
+                    <div>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+</section>

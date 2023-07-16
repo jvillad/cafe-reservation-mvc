@@ -1,0 +1,37 @@
+﻿@model BeanScene.Models.Food
+
+<div class="col food-card-container ">
+	<div class="food-card mx-auto">
+		<div class="food-image-container" style="background-image: url('@Model.ImageThumbnailUrl'); background-position: center">
+			<div class="food-details">
+				<h3 class="food-name text-center">
+					<a asp-controller="Foods" asp-action="Details" asp-route-id="@Model.FoodId" class="food-link text-decoration-none">
+						@Model.Name - @Model.Price.ToString("c")
+					</a>
+				</h3>
+				<p class="p-4 food-desc text-center">@Model.ShortDescription</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+@*<div class="col">
+    <div class="card food-card">
+        <div class="food-image-container">
+            <img src="@Model.ImageThumbnailUrl" class="card-img-top food-image-zoom" alt="@Model.Name">
+        </div>
+        <div >
+            <div class="d-flex justify-content-between mt-2 align-items-center p-3">
+                <h2 class="text-start">
+                    <a asp-controller="Food"
+                       asp-action="Details"
+                       asp-route-id="@Model.FoodId"
+                       class="food-link">@Model.Name</a>
+                </h2>
+                <h5 class="text-nowrap">
+                    @Model.Price.ToString("c")
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>*@

@@ -1,0 +1,91 @@
+﻿@model BeanScene.ViewModels.ReservationViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+    // Create select lists for start & end times
+    SelectList timeslotList = new SelectList(Model.Timeslots, "Time", "TimeFormatted");
+}
+
+<h1>Create</h1>
+
+<h4>Reservation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="Reservation.UserId" class="control-label"></label>
+                <select asp-for="Reservation.UserId" class="form-control" asp-items="Model.UserListItems"></select>
+            </div>*@
+            @*<div class="form-group">
+                <label asp-for="Reservation.SittingDate" class="control-label"></label>
+                <select asp-for="Reservation.SittingDate" class ="form-control" asp-items="ViewBag.SittingDate"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.SittingSittingTypeId" class="control-label"></label>
+                <select asp-for="Reservation.SittingSittingTypeId" class ="form-control" asp-items="ViewBag.SittingSittingTypeId"></select>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Reservation.Sitting" class="control-label"></label>
+                <select asp-for="SittingId" class="form-control" asp-items="Model.SittingsListItems"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.AreaId" class="control-label"></label>
+                <select asp-for="Reservation.AreaId" class ="form-control" asp-items="Model.AreasListItems"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.StartTimeId" class="control-label"></label>
+                <select asp-for="Reservation.StartTimeId" class="form-control" asp-items="timeslotList"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.EndTimeId" class="control-label"></label>
+                <select asp-for="Reservation.EndTimeId" class="form-control" asp-items="timeslotList"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.NumberOfPeople" class="control-label"></label>
+                <input asp-for="Reservation.NumberOfPeople" class="form-control" />
+                <span asp-validation-for="Reservation.NumberOfPeople" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.FirstName" class="control-label"></label>
+                <input asp-for="Reservation.FirstName" class="form-control" />
+                <span asp-validation-for="Reservation.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.LastName" class="control-label"></label>
+                <input asp-for="Reservation.LastName" class="form-control" />
+                <span asp-validation-for="Reservation.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.Email" class="control-label"></label>
+                <input asp-for="Reservation.Email" class="form-control" />
+                <span asp-validation-for="Reservation.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.Phone" class="control-label"></label>
+                <input asp-for="Reservation.Phone" class="form-control" />
+                <span asp-validation-for="Reservation.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.Note" class="control-label"></label>
+                <input asp-for="Reservation.Note" class="form-control" />
+                <span asp-validation-for="Reservation.Note" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Reservation.Status" class="control-label"></label>
+                <select asp-for="Reservation.Status" class="form-control"></select>
+                <span asp-validation-for="Reservation.Status" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

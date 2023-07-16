@@ -1,0 +1,79 @@
+﻿@model BeanScene.Models.Image
+
+@{
+    ViewData["Title"] = "Upload Image";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+
+
+<section class="container">
+    <h4>@ViewData["Title"]</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-4">
+                    <label asp-for="FileName" class="control-label"></label>
+                    <input asp-for="FileName" class="form-control" />
+                    <span asp-validation-for="FileName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="Url" hidden="true" class="control-label"></label>
+                    <input id="placeImageUrl" hidden="true" asp-for="Url" class="form-control" />
+                    <div id="image-dropzone" class="dropzone-container">
+                        <div class="dropzone-content">
+                            <i class="bi bi-cloud-arrow-up no-pointer-events"></i>
+                            <p class="no-pointer-events-text">Drag and drop file(s) here or click to upload.</p>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<script defer>
+
+
+    Dropzone.autoDicover = false
+    let imageDropzone = new Dropzone("#image-dropzone", {
+        paramName: "file",
+        url: "/Images/ImageUpload",
+        maxFiles: 1,
+        init: function () {
+            if (this.element) {
+                this.element.classList.add("dropzone")
+            }
+        },
+        // Runs on successful image upload
+        success: function (file) {
+            console.log("Upload image successful.")
+            const uploadedFileUrl = file?.xhr?.responseText ?? ""
+            const imageUrlInput = document.getElementById("placeImageUrl")
+            if (imageUrlInput && uploadedFileUrl) {
+                imageUrlInput.value = uploadedFileUrl.replaceAll('"', '')
+            }
+            console.log({ imageUrlInput }, { uploadedFileUrl })
+        }
+    })
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

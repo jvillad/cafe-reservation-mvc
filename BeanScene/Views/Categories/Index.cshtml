@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BeanScene.Models.Category>
+
+@{
+	ViewData["Title"] = "Category List";
+	Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<section class="container category-index pt-4">
+	<div class="mx-auto">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h2 class="text-center align-middle view-title">@ViewData["Title"]</h2>
+			<a asp-action="Create" class="btn create-new-btn align-middle">
+				<i class="bi bi-plus-lg" aria-hidden="true" aria-label="Add Category"></i>
+				Add Category
+			</a>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="p-1">
+						@Html.DisplayNameFor(model => model.CategoryName)
+					</th>
+					<th class="p-1">
+						@Html.DisplayNameFor(model => model.Description)
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr class="tr-height">
+						<td class="align-middle">
+							@Html.DisplayFor(modelItem => item.CategoryName)
+						</td>
+						<td class="align-middle">
+							@Html.DisplayFor(modelItem => item.Description)
+						</td>
+						<td class="align-middle">
+							<div class="category-crud">
+								<a class="btn btn-edit" asp-action="Edit" asp-route-id="@item.CategoryId" title="Edit Category">
+									<i class="bi bi-pencil-fill" aria-hidden="true"></i><span class="visually-hidden"> Edit</span>
+								</a>
+								<a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.CategoryId" title="Category Details">
+									<i class="bi bi-info-square-fill" aria-hidden="true" aria-label="Details"></i><span class="visually-hidden"> Details</span>
+								</a>
+								<a class="btn btn-outline-danger delete-btn" asp-action="Delete" asp-route-id="@item.CategoryId" title="Delete Category">
+
+									<i class="bi bi-trash-fill delete-btn" aria-hidden="true" aria-label="Delete"></i> <span class="visually-hidden"> Delete</span>
+								</a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</section>
+
+

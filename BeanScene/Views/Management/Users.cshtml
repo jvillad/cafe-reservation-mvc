@@ -1,0 +1,26 @@
+﻿@model List<BeanScene.Data.BeanSceneApplicationUser>
+
+@{
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+
+<h2>User List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Full Name</th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.FullName</td>                
+            </tr>
+        }
+    </tbody>
+</table>

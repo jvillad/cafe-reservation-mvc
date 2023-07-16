@@ -1,0 +1,52 @@
+﻿@model List<Reservation>
+
+    @{
+         ViewData["Title"] = "My Reservations";
+    }
+
+<section class="container py-5">
+    <h4>@ViewData["Title"]</h4>
+    @if (Model.Count == 0)
+    {
+        <p>No reservations found.</p>
+    }
+    else
+    {
+       <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Area</th>
+                    <th>Sitting Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model)
+                {
+                     // returns a string based on status
+                    string statusClass = reservation.Status switch
+                    {
+                        Reservation.StatusEnum.Pending => "pending",
+                        Reservation.StatusEnum.Confirmed => "confirmed",
+                        Reservation.StatusEnum.InProgress => "in-progress",
+                        Reservation.StatusEnum.Completed => "completed",
+                        _ => "cancelled"
+                    };
+
+                    <tr>
+                        <td>@reservation.Id</td>
+                        <td>@reservation.Area.Name</td>
+                        <td>@reservation.Sitting.Date.ToShortDateString()</td>
+                        <td>@reservation.StartTime.TimeFormatted</td>
+                        <td>@reservation.EndTime.TimeFormatted</td>
+                        <td class="@statusClass">@reservation.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</section>

@@ -1,0 +1,58 @@
+﻿@using BeanScene.Data;
+@inject SignInManager<BeanSceneApplicationUser> SignInManager
+@inject UserManager<BeanSceneApplicationUser> UserManager
+@{
+    BeanSceneApplicationUser applicationUser = await UserManager.GetUserAsync(User) ?? new BeanSceneApplicationUser(); ;
+    applicationUser.UserManager = UserManager;
+}
+<ul class="navbar-nav gap-3">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="dropdown">
+            <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle dropdown-icon-color user-btn" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://cdn.pixabay.com/photo/2017/02/23/13/05/avatar-2092113_1280.png" class="rounded-circle" style="width: 34px; height: 34px;"
+                     alt="Avatar" />
+                <span class="d-none d-sm-inline mx-1 text-white">@applicationUser.FullName</span>
+            </a>
+            <ul class="dropdown-menu shadow" aria-labelledby="dropdownUser1">
+                @if (applicationUser.IsManager && applicationUser.IsStaff || applicationUser.IsManager)
+                {
+                    <li><a id="manage" class="nav-link" asp-controller="Reservations" asp-action="Index"><span class="ms-1 d-none d-sm-inline">Dashboard</span></a></li>
+                }
+                else if (applicationUser.IsStaff)
+                {
+                    <li><a id="manage" class="nav-link" asp-controller="Reservations" asp-action="Index"><span class="ms-1 d-none d-sm-inline">View Reservations</span></a></li>
+                }
+                else if (applicationUser.IsUser)
+                {
+                    <li><a id="manage" class="nav-link" asp-controller="Reservations" asp-action="Create"><span class="ms-1 d-none d-sm-inline">Add Reservation</span></a></li>
+                    <li><a id="manage" class="nav-link" asp-controller="Reservations" asp-action="MyReservations"><span class="ms-1 d-none d-sm-inline">My Reservations</span></a></li>
+                }
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span class="ms-1 d-none d-sm-inline">Profile</span></a></li>
+                <li>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark"><span class="ms-1 d-none d-sm-inline">Logout</span></button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            @if (!Context.Request.Path.StartsWithSegments("/Identity/Account/Login"))
+            {
+                <a class="nav-link login-outline text-center" id="login" asp-area="Identity" asp-page="/Account/Login">LOGIN</a>
+            }
+        </li>
+        <li class="nav-item reg-link">
+            @if (!Context.Request.Path.StartsWithSegments("/Identity/Account/Register"))
+            {
+                <a class="nav-link text-center" id="register" asp-area="Identity" asp-page="/Account/Register">JOIN NOW</a>
+            }
+        </li>
+    }
+</ul>
