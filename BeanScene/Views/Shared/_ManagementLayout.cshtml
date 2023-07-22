@@ -55,6 +55,7 @@
                                 <span class="ms-1 d-none d-sm-inline">Reservations</span>
                             </a>
                         </li>
+                    
 
                         <li class="dropdown">
                             <a class="nav-link text-dark dropdown-toggle px-sm-0 px-2 d-flex justify-content-center align-items-center" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -117,6 +118,13 @@
                                 <i class="icon-size bi-people"></i><span class="ms-1 d-none d-sm-inline">View Users</span>
                             </a>
                         </li>
+                        <li>
+                            <a asp-controller="Images" asp-action="Index" class="nav-link px-sm-0 px-2 d-flex justify-content-center align-items-center">
+
+                                <i class="icon-size bi bi-file-image"></i>
+                                <span class="ms-1 d-none d-sm-inline">Images</span>
+                            </a>
+                        </li>
                     </ul>
 
                     <div>
@@ -158,9 +166,6 @@
                     @RenderBody()
                 </main>
             </div>
-            @*            <footer class="row bg-light py-4 mt-auto">
-            <div class="col"> BeanScene 2023 </div>
-            </footer>*@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
