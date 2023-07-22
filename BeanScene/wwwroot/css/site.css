@@ -938,7 +938,12 @@ figure.social-photo {
 }
 
 #Reservation_EndTimeId option:enabled {
-    background-color: #1a2118;
+   /* background-color: #1a2118;*/
+    color: #0a0a0a;
+    font-weight: bold;
+}
+#Reservation_EndTimeId option:disabled {
+    background-color: #fff;
     color: #fff;
     font-weight: bold;
 }
